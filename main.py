@@ -17,10 +17,6 @@ chrome_options.add_experimental_option(
     "excludeSwitches", ["enable-automation"])
 chrome_options.add_experimental_option('useAutomationExtension', False)
 
-# start the browser
-browser = webdriver.Chrome(options=chrome_options)
-browser.maximize_window()
-
 
 def slow_type(element, text):
     for char in text:
@@ -45,12 +41,17 @@ search_queries = ["webpack configuration in dotnet project",
                   "ASP net core middleware"]
 
 while True:
+    # start the browser
+    browser = webdriver.Chrome(options=chrome_options)
+    browser.maximize_window()
+
     try:
+        # TODO
         # scenario 1: open tabs with predefined addresses
-        for address in addresses:
-            browser.execute_script(f"window.open('{address}');")
-            wait_period = random.randint(10, 200)
-            time.sleep(wait_period)
+        # for address in addresses:
+        #     browser.execute_script(f"window.open('{address}');")
+        #     wait_period = random.randint(10, 200)
+        #     time.sleep(wait_period)
 
         # scenario 3: go to google.com, enter a search query, and submit
         for query in search_queries:
@@ -70,15 +71,18 @@ while True:
                     EC.presence_of_element_located((By.ID, "search")))
             except Exception as e:
                 print("An error occurred while waiting for search results:", str(e))
+                continue
 
             # time.sleep(5)
 
             # Find the first link in the search results and click on it
             try:
                 first_link = search_results.find_element(By.TAG_NAME, "a")
-                first_link.click()
+                if first_link:
+                    first_link.click()
             except Exception as e:
                 print("An error occurred while clicking the first link:", str(e))
+                continue
 
             wait_period = random.randint(10, 200)
             time.sleep(wait_period)
@@ -97,9 +101,5 @@ while True:
         browser.quit()
         continue
 
-    # If the code reaches this point without any exceptions, exit the loop
-    continue
-
-
-# remember to quit the browser once finished to avoid resource leak
-browser.quit()
+    # remember to quit the browser once finished to avoid resource leak
+    browser.quit()
