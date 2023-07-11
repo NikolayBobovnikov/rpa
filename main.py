@@ -43,7 +43,7 @@ while True:
         # scenario 1: open tabs with predefined addresses
         for address in addresses:
             browser.execute_script(f"window.open('{address}');")
-            wait_period = random.randint(10, 200) / 1000
+            wait_period = random.randint(10, 200)
             time.sleep(wait_period)
 
         # scenario 3: go to google.com, enter a search query, and submit
@@ -74,7 +74,7 @@ while True:
             except Exception as e:
                 print("An error occurred while clicking the first link:", str(e))
 
-            wait_period = random.randint(10, 200) / 1000
+            wait_period = random.randint(10, 200)
             time.sleep(wait_period)
 
         # close all tabs except the first one
