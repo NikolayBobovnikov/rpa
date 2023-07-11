@@ -9,9 +9,16 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.action_chains import ActionChains
 
+from selenium.webdriver.chrome.options import Options
+
+# Create Chrome WebDriver options
+chrome_options = webdriver.ChromeOptions()
+chrome_options.add_experimental_option(
+    "excludeSwitches", ["enable-automation"])
+chrome_options.add_experimental_option('useAutomationExtension', False)
 
 # start the browser
-browser = webdriver.Chrome()
+browser = webdriver.Chrome(options=chrome_options)
 browser.maximize_window()
 
 
@@ -24,8 +31,7 @@ def slow_type(element, text):
         time.sleep(wait_period)
 
 
-addresses = ["https://www.google.com", "https://www.wikipedia.org", "https://www.python.org",
-             "https://1vtms.visualstudio.com/BATS/_versionControl?path=%24/BATS/bats",
+addresses = ["https://1vtms.visualstudio.com/BATS/_versionControl?path=%24/BATS/bats",
              "https://trello.com/b/Ic1XMZx5/sport-new?filter=member:nikolay_bobovnikov"]
 
 search_queries = ["webpack configuration in dotnet project",
