@@ -11,7 +11,7 @@ command = f'"{vs_exe_path}" "{project_path}"'
 subprocess.Popen(command, shell=True)
 
 # Wait for Notepad++ to open
-pyautogui.sleep(30)
+pyautogui.sleep(40)
 
 
 # Read text from file
@@ -21,6 +21,7 @@ with open(file_path, 'r') as file:
         counter = 0
         # Read each line in the file
         for line in file:
+            counter = counter + 1
             interval = random.randint(10, 200) / 1000
             print(line.strip())  # strip() removes the newline character
             pyautogui.typewrite(line, interval=interval)
@@ -28,6 +29,7 @@ with open(file_path, 'r') as file:
             pyautogui.sleep(random.randint(100, 2000) / 1000)
             if counter == 10:
                 pyautogui.sleep(60)
+                counter = 0
 
 # Wait for a moment
 pyautogui.sleep(1)
