@@ -1,0 +1,408 @@
+using System;
+using System.Collections.Generic;
+
+namespace SPORTv2.Data.Models;
+
+public partial class AcvOrders2
+{
+    public int Id { get; set; }
+
+    public string? PickupContactPhone { get; set; }
+
+    public string? PickupStreet { get; set; }
+
+    public string? PickupCity { get; set; }
+
+    public string? PickupSt { get; set; }
+
+    public string? PickupZip { get; set; }
+
+    public string? DropContactPhone { get; set; }
+
+    public string? DropAddress { get; set; }
+
+    public string? DropCity { get; set; }
+
+    public string? St { get; set; }
+
+    public string? Zip { get; set; }
+
+    public DateTime? Fad { get; set; }
+
+    public DateTime? Lad { get; set; }
+
+    public DateTime? FadDelivery { get; set; }
+
+    public int? CpayLongHaul { get; set; }
+
+    public short? Year { get; set; }
+
+    public string? _1Make { get; set; }
+
+    public string? _1Model { get; set; }
+
+    public string? _1Type { get; set; }
+
+    public string? _1Color { get; set; }
+
+    public decimal? _1Cp { get; set; }
+
+    public decimal? _1Bf { get; set; }
+
+    public short? _2Year { get; set; }
+
+    public string? _2Make { get; set; }
+
+    public string? _2Model { get; set; }
+
+    public string? _2Type { get; set; }
+
+    public string? _2Color { get; set; }
+
+    public decimal? _2Cp { get; set; }
+
+    public decimal? _2Bf { get; set; }
+
+    public string? OrderId { get; set; }
+
+    public bool? Imported { get; set; }
+
+    public short? _3Year { get; set; }
+
+    public string? _3Make { get; set; }
+
+    public string? _3Model { get; set; }
+
+    public string? _3Type { get; set; }
+
+    public string? _3Color { get; set; }
+
+    public decimal? _3Cp { get; set; }
+
+    public decimal? _3Bf { get; set; }
+
+    public short? _4Year { get; set; }
+
+    public string? _4Make { get; set; }
+
+    public string? _4Model { get; set; }
+
+    public string? _4Type { get; set; }
+
+    public string? _4Color { get; set; }
+
+    public decimal? _4Cp { get; set; }
+
+    public decimal? _4Bf { get; set; }
+
+    public short? VehicleCount { get; set; }
+
+    public int? OpportunityId { get; set; }
+
+    public string? Inop { get; set; }
+
+    public string? PickupContactName { get; set; }
+
+    public string? DropContactName { get; set; }
+
+    public string? Vin { get; set; }
+
+    public string? Trim { get; set; }
+
+    public string? PickupCompanyName { get; set; }
+
+    public string? DropCompanyName { get; set; }
+
+    public string? OpUid { get; set; }
+
+    public DateTime? NotificationSent { get; set; }
+
+    public string? OriginContactEmail { get; set; }
+
+    public string? DestinationContactEmail { get; set; }
+
+    public string? AdditionalInfo { get; set; }
+}
+
+
+public partial class AcvOrder
+{
+    public int Id { get; set; }
+
+    public string? PickupContactPhone { get; set; }
+
+    public string? PickupStreet { get; set; }
+
+    public string? PickupCity { get; set; }
+
+    public string? PickupSt { get; set; }
+
+    public string? PickupZip { get; set; }
+
+    public string? DropContactPhone { get; set; }
+
+    public string? DropAddress { get; set; }
+
+    public string? DropCity { get; set; }
+
+    public string? St { get; set; }
+
+    public string? Zip { get; set; }
+
+    public DateTime? Fad { get; set; }
+
+    public DateTime? Lad { get; set; }
+
+    public DateTime? FadDelivery { get; set; }
+
+    public int? CpayLongHaul { get; set; }
+
+    public short? Year { get; set; }
+
+    public string? _1Make { get; set; }
+
+    public string? _1Model { get; set; }
+
+    public string? _1Type { get; set; }
+
+    public string? _1Color { get; set; }
+
+    public decimal? _1Cp { get; set; }
+
+    public decimal? _1Bf { get; set; }
+
+    public short? _2Year { get; set; }
+
+    public string? _2Make { get; set; }
+
+    public string? _2Model { get; set; }
+
+    public string? _2Type { get; set; }
+
+    public string? _2Color { get; set; }
+
+    public decimal? _2Cp { get; set; }
+
+    public decimal? _2Bf { get; set; }
+
+    public string? OrderId { get; set; }
+
+    public bool? Imported { get; set; }
+
+    public short? _3Year { get; set; }
+
+    public string? _3Make { get; set; }
+
+    public string? _3Model { get; set; }
+
+    public string? _3Type { get; set; }
+
+    public string? _3Color { get; set; }
+
+    public decimal? _3Cp { get; set; }
+
+    public decimal? _3Bf { get; set; }
+
+    public short? _4Year { get; set; }
+
+    public string? _4Make { get; set; }
+
+    public string? _4Model { get; set; }
+
+    public string? _4Type { get; set; }
+
+    public string? _4Color { get; set; }
+
+    public decimal? _4Cp { get; set; }
+
+    public decimal? _4Bf { get; set; }
+
+    public short? VehicleCount { get; set; }
+
+    public int? OpportunityId { get; set; }
+
+    public string? Inop { get; set; }
+
+    public string? PickupContactName { get; set; }
+
+    public string? DropContactName { get; set; }
+
+    public string? Vin { get; set; }
+
+    public string? Trim { get; set; }
+
+    public string? PickupCompanyName { get; set; }
+
+    public string? DropCompanyName { get; set; }
+
+    public string? OpUid { get; set; }
+
+    public DateTime? NotificationSent { get; set; }
+}
+
+public partial class ApiPartner
+{
+    public int Id { get; set; }
+
+    public string PartnerCompanyName { get; set; } = null!;
+
+    public string PrimaryContact { get; set; } = null!;
+
+    public Guid PartnerId { get; set; }
+
+    public string Reseller { get; set; } = null!;
+
+    public decimal BrokerFeeFlat { get; set; }
+
+    public decimal BrokerFeePct { get; set; }
+
+    public decimal BrokerFeeInop { get; set; }
+
+    public decimal BrokerFeeEnclosed { get; set; }
+
+    public decimal BrokerFeePctEnclosed { get; set; }
+
+    public byte AquaRoundUp { get; set; }
+
+    public decimal AquaAdjustment { get; set; }
+
+    public DateTime DateCreated { get; set; }
+
+    public bool ConfirmPrice { get; set; }
+
+    public bool? Active { get; set; }
+
+    public Guid LeadSourceId { get; set; }
+
+    public int? LeadSourceIdInt { get; set; }
+
+    public int TenantId { get; set; }
+
+    public Guid? PrimaryRepId { get; set; }
+
+    public int? TeamId { get; set; }
+
+    public decimal? ExpressPriceMultiplier { get; set; }
+
+    public int? ForcedCustomerId { get; set; }
+
+    public byte PaymentTerms { get; set; }
+
+    public short SetSecondaryStatus { get; set; }
+
+    public bool? PostOrder { get; set; }
+
+    public bool? DashboardEnabled { get; set; }
+
+    public string? Description { get; set; }
+}
+
+
+public partial class Atodorder
+{
+    public string? Id { get; set; }
+
+    public string? Cfn { get; set; }
+
+    public string? Cln { get; set; }
+
+    public string? Ocity { get; set; }
+
+    public string? Ostate { get; set; }
+
+    public string? Ozip { get; set; }
+
+    public string? Dcity { get; set; }
+
+    public string? Dstate { get; set; }
+
+    public string? Dzip { get; set; }
+
+    public DateTime? Shipdate { get; set; }
+
+    public DateTime? Ordercreated { get; set; }
+
+    public string? Cemail { get; set; }
+
+    public string? Cphone1 { get; set; }
+
+    public string? Cmobile { get; set; }
+
+    public string? Cphone2 { get; set; }
+
+    public string? Caddress1 { get; set; }
+
+    public string? Caddress2 { get; set; }
+
+    public string? CCity { get; set; }
+
+    public string? CState { get; set; }
+
+    public string? CZip { get; set; }
+
+    public string? Source { get; set; }
+
+    public string? Transporttype { get; set; }
+
+    public DateTime? OCreated { get; set; }
+
+    public double? Tariff { get; set; }
+
+    public int? Brokerfee { get; set; }
+
+    public string? AssignedTo { get; set; }
+
+    public string? OName { get; set; }
+
+    public string? Ocompany { get; set; }
+
+    public string? Oaddress1 { get; set; }
+
+    public string? Oaddress2 { get; set; }
+
+    public string? Ophone1 { get; set; }
+
+    public string? Omobile { get; set; }
+
+    public string? Ophone2 { get; set; }
+
+    public string? DName { get; set; }
+
+    public string? Dcompany { get; set; }
+
+    public string? Daddress1 { get; set; }
+
+    public string? Daddress2 { get; set; }
+
+    public string? Dphone1 { get; set; }
+
+    public string? Dphone2 { get; set; }
+
+    public string? Dmobile { get; set; }
+
+    public string? Carriername { get; set; }
+
+    public string? Driver { get; set; }
+
+    public string? Driverphone { get; set; }
+
+    public DateTime? Pickupdate { get; set; }
+
+    public DateTime? Deliverydate { get; set; }
+
+    public string? Status { get; set; }
+
+    public int? Carrierpay { get; set; }
+
+    public string? Vin { get; set; }
+
+    public double? Year { get; set; }
+
+    public string? Make { get; set; }
+
+    public string? Model { get; set; }
+
+    public double? InopOpposite { get; set; }
+
+    public int TblId { get; set; }
+}
