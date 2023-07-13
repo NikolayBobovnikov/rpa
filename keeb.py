@@ -2,6 +2,7 @@ import subprocess
 import pyautogui
 import random
 import time
+import ctypes
 
 # Launch Notepad++
 vs_exe_path = r"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\devenv.exe"
@@ -12,6 +13,15 @@ subprocess.Popen(command, shell=True)
 
 # Wait for Notepad++ to open
 pyautogui.sleep(40)
+
+
+def get_caret_position():
+    class CaretInfo(ctypes.Structure):
+        _fields_ = [("x", ctypes.c_long), ("y", ctypes.c_long)]
+
+    info = CaretInfo()
+    ctypes.windll.user32.GetCaretPos(ctypes.byref(info))
+    return info.x, info.y
 
 
 # Read text from file
@@ -28,7 +38,13 @@ with open(file_path, 'r') as file:
             pyautogui.press('enter')
             pyautogui.sleep(random.randint(100, 2000) / 1000)
             if counter == 10:
-                pyautogui.sleep(60)
+                caret_x, caret_y = get_caret_position()
+                pyautogui.moveTo(caret_x, caret_y)
+                pyautogui.sleep(random.randint(5, 100))
+                pyautogui.scroll(3)  # Scroll three units up
+                pyautogui.sleep(random.randint(5, 10))
+                pyautogui.scroll(-3)  # Scroll three units down
+                pyautogui.sleep(random.randint(5, 10))
                 counter = 0
 
 # Wait for a moment
