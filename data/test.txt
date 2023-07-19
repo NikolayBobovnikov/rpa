@@ -1,408 +1,589 @@
-using System;
-using System.Collections.Generic;
+@using SPORTv2.Contracts.OrderBookingContract
 
-namespace SPORTv2.Data.Models;
-
-public partial class AcvOrders2
-{
-    public int Id { get; set; }
-
-    public string? PickupContactPhone { get; set; }
-
-    public string? PickupStreet { get; set; }
-
-    public string? PickupCity { get; set; }
-
-    public string? PickupSt { get; set; }
-
-    public string? PickupZip { get; set; }
-
-    public string? DropContactPhone { get; set; }
-
-    public string? DropAddress { get; set; }
-
-    public string? DropCity { get; set; }
-
-    public string? St { get; set; }
-
-    public string? Zip { get; set; }
-
-    public DateTime? Fad { get; set; }
-
-    public DateTime? Lad { get; set; }
-
-    public DateTime? FadDelivery { get; set; }
-
-    public int? CpayLongHaul { get; set; }
-
-    public short? Year { get; set; }
-
-    public string? _1Make { get; set; }
-
-    public string? _1Model { get; set; }
-
-    public string? _1Type { get; set; }
-
-    public string? _1Color { get; set; }
-
-    public decimal? _1Cp { get; set; }
-
-    public decimal? _1Bf { get; set; }
-
-    public short? _2Year { get; set; }
-
-    public string? _2Make { get; set; }
-
-    public string? _2Model { get; set; }
-
-    public string? _2Type { get; set; }
-
-    public string? _2Color { get; set; }
-
-    public decimal? _2Cp { get; set; }
-
-    public decimal? _2Bf { get; set; }
-
-    public string? OrderId { get; set; }
-
-    public bool? Imported { get; set; }
-
-    public short? _3Year { get; set; }
-
-    public string? _3Make { get; set; }
-
-    public string? _3Model { get; set; }
-
-    public string? _3Type { get; set; }
-
-    public string? _3Color { get; set; }
-
-    public decimal? _3Cp { get; set; }
-
-    public decimal? _3Bf { get; set; }
-
-    public short? _4Year { get; set; }
-
-    public string? _4Make { get; set; }
-
-    public string? _4Model { get; set; }
-
-    public string? _4Type { get; set; }
-
-    public string? _4Color { get; set; }
-
-    public decimal? _4Cp { get; set; }
-
-    public decimal? _4Bf { get; set; }
-
-    public short? VehicleCount { get; set; }
-
-    public int? OpportunityId { get; set; }
-
-    public string? Inop { get; set; }
-
-    public string? PickupContactName { get; set; }
-
-    public string? DropContactName { get; set; }
-
-    public string? Vin { get; set; }
-
-    public string? Trim { get; set; }
-
-    public string? PickupCompanyName { get; set; }
-
-    public string? DropCompanyName { get; set; }
-
-    public string? OpUid { get; set; }
-
-    public DateTime? NotificationSent { get; set; }
-
-    public string? OriginContactEmail { get; set; }
-
-    public string? DestinationContactEmail { get; set; }
-
-    public string? AdditionalInfo { get; set; }
+@{
+    var dto = (OrderBookingGetDto?)ViewData["OrderModel"];
+}
+@{
+    Layout = null;
 }
 
+<form class="mb-4">
+    <!-- First Name -->
+    <div class="mb-4">
+        <input type="text" class="form-control" id="CustomerFirstName" value="@dto?.CustomerFirstName" placeholder="First Name">
 
-public partial class AcvOrder
-{
-    public int Id { get; set; }
+    </div>
 
-    public string? PickupContactPhone { get; set; }
+    <!-- Last Name -->
+    <div class="mb-4">
+        <input type="text" class="form-control" id="CustomerLastName" value="@dto?.CustomerLastName" placeholder="Last Name">
+    </div>
 
-    public string? PickupStreet { get; set; }
+    <!-- Add Company Name Button -->
+    <div class="mb-4" id="addCompanyNameDiv" @(string.IsNullOrWhiteSpace(dto?.CustomerCompanyName) ? "" : "style=display:none;")>
+        <button type="button" class="btn__add" id="addCompanyName" onclick="showCompanyNameInput()">
+            <!-- button content -->
+        </button>
+    </div>
 
-    public string? PickupCity { get; set; }
+    <!-- Company Name -->
+    <div class="mb-4" id="companyNameDiv" @(string.IsNullOrWhiteSpace(dto?.CustomerCompanyName) ? "style=display:none;" : "")>
+        <input type="text" class="form-control" id="CustomerCompanyName" value="@dto?.CustomerCompanyName" placeholder="Company Name">
+    </div>
 
-    public string? PickupSt { get; set; }
 
-    public string? PickupZip { get; set; }
+    <!-- Email -->
+    <div class="mb-4">
+        <input type="email" class="form-control" id="CustomerEmail" value="@dto?.CustomerEmail" placeholder="Email">
 
-    public string? DropContactPhone { get; set; }
+    </div>
 
-    public string? DropAddress { get; set; }
+   <!-- Add Another Email Button -->
+    <div class="mb-4" id="addAnotherEmailDiv" @(string.IsNullOrWhiteSpace(dto?.CustomerEmail2) ? "" : "style=display:none;")>
+        <button type="button" class="btn__add" id="addAnotherEmail" onclick="showAdditionalEmailInput()">
+           <span class="btn__base--left">
+                <i class="fa-sharp fa-solid fa-circle-plus"></i>
+            </span>
+            <span class="btn__base--right">
+                Add Company Name
+            </span>
+        </button>
+    </div>
 
-    public string? DropCity { get; set; }
+    <!-- Additional Email -->
+    <div class="mb-4" id="additionalEmailDiv" @(string.IsNullOrWhiteSpace(dto?.CustomerEmail2) ? "style=display:none;" : "")>
+        <input type="email" class="form-control" id="CustomerEmail2" value="@dto?.CustomerEmail2" placeholder="Additional Email">
+    </div>
 
-    public string? St { get; set; }
 
-    public string? Zip { get; set; }
+    <!-- Phone -->
+    <div class="mb-4">
+        <input type="text" class="form-control" id="CustomerPhone" value="@dto?.CustomerPhone" placeholder="Phone">
 
-    public DateTime? Fad { get; set; }
+    </div>
 
-    public DateTime? Lad { get; set; }
+   <!-- Add Another Phone Button -->
+    <div class="mb-4" id="addAnotherPhoneDiv" @(string.IsNullOrWhiteSpace(dto?.CustomerPhone2) ? "" : "style=display:none;")>
+        <button type="button" class="btn__add" id="addAnotherPhone" onclick="showAdditionalPhoneInput()">
+            <span class="btn__base--left">
+                <i class="fa-sharp fa-solid fa-circle-plus"></i>
+            </span>
+            <span class="btn__base--right">
+                Add Another Phone
+            </span>
+        </button>
+    </div>
 
-    public DateTime? FadDelivery { get; set; }
+    <!-- Additional Phone -->
+    <div class="mb-4" id="additionalPhoneDiv" @(string.IsNullOrWhiteSpace(dto?.CustomerPhone2) ? "style=display:none;" : "")>
+        <input type="text" class="form-control" id="CustomerPhone2" value="@dto?.CustomerPhone2" placeholder="Additional Phone">
+    </div>
 
-    public int? CpayLongHaul { get; set; }
 
-    public short? Year { get; set; }
+    <!-- First Available Pickup Date -->
+    <div class="mb-4">
+        <input type="date" class="form-control" id="FirstAvailablePickupDate" value="@dto?.FirstAvailablePickupDate?.ToString("yyyy-MM-dd")">
 
-    public string? _1Make { get; set; }
+    </div>
 
-    public string? _1Model { get; set; }
+    <!-- Label below date -->
+    <div class="mb-4">
+        <div class="header-block__desc">*This is the earliest date for pickup</div>
 
-    public string? _1Type { get; set; }
+    </div>
 
-    public string? _1Color { get; set; }
+    <!-- Note -->
+    <div class="mb-4">
+        <label for="CommentFromShipper" class="form-label">Note</label>
+        <textarea class="form-control textarea-terms" id="CommentFromShipper" rows="2">@dto?.CommentFromShipper</textarea>
+    </div>
+</form>
 
-    public decimal? _1Cp { get; set; }
+<script>
+    function showCompanyNameInput() {
+        document.getElementById("addCompanyNameDiv").style.display = "none";
+        document.getElementById("companyNameDiv").style.display = "block";
+    }
 
-    public decimal? _1Bf { get; set; }
+    function showAdditionalEmailInput() {
+        document.getElementById("addAnotherEmailDiv").style.display = "none";
+        document.getElementById("additionalEmailDiv").style.display = "block";
+    }
 
-    public short? _2Year { get; set; }
+    function showAdditionalPhoneInput() {
+        document.getElementById("addAnotherPhoneDiv").style.display = "none";
+        document.getElementById("additionalPhoneDiv").style.display = "block";
+    }
+</script>
 
-    public string? _2Make { get; set; }
+@using SPORTv2.Contracts.OrderBookingContract
 
-    public string? _2Model { get; set; }
-
-    public string? _2Type { get; set; }
-
-    public string? _2Color { get; set; }
-
-    public decimal? _2Cp { get; set; }
-
-    public decimal? _2Bf { get; set; }
-
-    public string? OrderId { get; set; }
-
-    public bool? Imported { get; set; }
-
-    public short? _3Year { get; set; }
-
-    public string? _3Make { get; set; }
-
-    public string? _3Model { get; set; }
-
-    public string? _3Type { get; set; }
-
-    public string? _3Color { get; set; }
-
-    public decimal? _3Cp { get; set; }
-
-    public decimal? _3Bf { get; set; }
-
-    public short? _4Year { get; set; }
-
-    public string? _4Make { get; set; }
-
-    public string? _4Model { get; set; }
-
-    public string? _4Type { get; set; }
-
-    public string? _4Color { get; set; }
-
-    public decimal? _4Cp { get; set; }
-
-    public decimal? _4Bf { get; set; }
-
-    public short? VehicleCount { get; set; }
-
-    public int? OpportunityId { get; set; }
-
-    public string? Inop { get; set; }
-
-    public string? PickupContactName { get; set; }
-
-    public string? DropContactName { get; set; }
-
-    public string? Vin { get; set; }
-
-    public string? Trim { get; set; }
-
-    public string? PickupCompanyName { get; set; }
-
-    public string? DropCompanyName { get; set; }
-
-    public string? OpUid { get; set; }
-
-    public DateTime? NotificationSent { get; set; }
+@{
+    var dto = (OrderBookingGetDto?)ViewData["OrderModel"];
+}
+@{
+    Layout = null;
 }
 
-public partial class ApiPartner
-{
-    public int Id { get; set; }
+<form class="mb-4">
+    <!-- First Name -->
+    <div class="mb-4">
+        <input type="text" class="form-control" id="CustomerFirstName" value="@dto?.CustomerFirstName" placeholder="First Name">
 
-    public string PartnerCompanyName { get; set; } = null!;
+    </div>
 
-    public string PrimaryContact { get; set; } = null!;
+    <!-- Last Name -->
+    <div class="mb-4">
+        <input type="text" class="form-control" id="CustomerLastName" value="@dto?.CustomerLastName" placeholder="Last Name">
+    </div>
 
-    public Guid PartnerId { get; set; }
+    <!-- Add Company Name Button -->
+    <div class="mb-4" id="addCompanyNameDiv" @(string.IsNullOrWhiteSpace(dto?.CustomerCompanyName) ? "" : "style=display:none;")>
+        <button type="button" class="btn__add" id="addCompanyName" onclick="showCompanyNameInput()">
+            <!-- button content -->
+        </button>
+    </div>
 
-    public string Reseller { get; set; } = null!;
+    <!-- Company Name -->
+    <div class="mb-4" id="companyNameDiv" @(string.IsNullOrWhiteSpace(dto?.CustomerCompanyName) ? "style=display:none;" : "")>
+        <input type="text" class="form-control" id="CustomerCompanyName" value="@dto?.CustomerCompanyName" placeholder="Company Name">
+    </div>
 
-    public decimal BrokerFeeFlat { get; set; }
 
-    public decimal BrokerFeePct { get; set; }
+    <!-- Email -->
+    <div class="mb-4">
+        <input type="email" class="form-control" id="CustomerEmail" value="@dto?.CustomerEmail" placeholder="Email">
 
-    public decimal BrokerFeeInop { get; set; }
+    </div>
 
-    public decimal BrokerFeeEnclosed { get; set; }
+   <!-- Add Another Email Button -->
+    <div class="mb-4" id="addAnotherEmailDiv" @(string.IsNullOrWhiteSpace(dto?.CustomerEmail2) ? "" : "style=display:none;")>
+        <button type="button" class="btn__add" id="addAnotherEmail" onclick="showAdditionalEmailInput()">
+           <span class="btn__base--left">
+                <i class="fa-sharp fa-solid fa-circle-plus"></i>
+            </span>
+            <span class="btn__base--right">
+                Add Company Name
+            </span>
+        </button>
+    </div>
 
-    public decimal BrokerFeePctEnclosed { get; set; }
+    <!-- Additional Email -->
+    <div class="mb-4" id="additionalEmailDiv" @(string.IsNullOrWhiteSpace(dto?.CustomerEmail2) ? "style=display:none;" : "")>
+        <input type="email" class="form-control" id="CustomerEmail2" value="@dto?.CustomerEmail2" placeholder="Additional Email">
+    </div>
 
-    public byte AquaRoundUp { get; set; }
 
-    public decimal AquaAdjustment { get; set; }
+    <!-- Phone -->
+    <div class="mb-4">
+        <input type="text" class="form-control" id="CustomerPhone" value="@dto?.CustomerPhone" placeholder="Phone">
 
-    public DateTime DateCreated { get; set; }
+    </div>
 
-    public bool ConfirmPrice { get; set; }
+   <!-- Add Another Phone Button -->
+    <div class="mb-4" id="addAnotherPhoneDiv" @(string.IsNullOrWhiteSpace(dto?.CustomerPhone2) ? "" : "style=display:none;")>
+        <button type="button" class="btn__add" id="addAnotherPhone" onclick="showAdditionalPhoneInput()">
+            <span class="btn__base--left">
+                <i class="fa-sharp fa-solid fa-circle-plus"></i>
+            </span>
+            <span class="btn__base--right">
+                Add Another Phone
+            </span>
+        </button>
+    </div>
 
-    public bool? Active { get; set; }
+    <!-- Additional Phone -->
+    <div class="mb-4" id="additionalPhoneDiv" @(string.IsNullOrWhiteSpace(dto?.CustomerPhone2) ? "style=display:none;" : "")>
+        <input type="text" class="form-control" id="CustomerPhone2" value="@dto?.CustomerPhone2" placeholder="Additional Phone">
+    </div>
 
-    public Guid LeadSourceId { get; set; }
 
-    public int? LeadSourceIdInt { get; set; }
+    <!-- First Available Pickup Date -->
+    <div class="mb-4">
+        <input type="date" class="form-control" id="FirstAvailablePickupDate" value="@dto?.FirstAvailablePickupDate?.ToString("yyyy-MM-dd")">
 
-    public int TenantId { get; set; }
+    </div>
 
-    public Guid? PrimaryRepId { get; set; }
+    <!-- Label below date -->
+    <div class="mb-4">
+        <div class="header-block__desc">*This is the earliest date for pickup</div>
 
-    public int? TeamId { get; set; }
+    </div>
 
-    public decimal? ExpressPriceMultiplier { get; set; }
+    <!-- Note -->
+    <div class="mb-4">
+        <label for="CommentFromShipper" class="form-label">Note</label>
+        <textarea class="form-control textarea-terms" id="CommentFromShipper" rows="2">@dto?.CommentFromShipper</textarea>
+    </div>
+</form>
 
-    public int? ForcedCustomerId { get; set; }
+<script>
+    function showCompanyNameInput() {
+        document.getElementById("addCompanyNameDiv").style.display = "none";
+        document.getElementById("companyNameDiv").style.display = "block";
+    }
 
-    public byte PaymentTerms { get; set; }
+    function showAdditionalEmailInput() {
+        document.getElementById("addAnotherEmailDiv").style.display = "none";
+        document.getElementById("additionalEmailDiv").style.display = "block";
+    }
 
-    public short SetSecondaryStatus { get; set; }
+    function showAdditionalPhoneInput() {
+        document.getElementById("addAnotherPhoneDiv").style.display = "none";
+        document.getElementById("additionalPhoneDiv").style.display = "block";
+    }
+</script>
 
-    public bool? PostOrder { get; set; }
+@using SPORTv2.Contracts.OrderBookingContract
 
-    public bool? DashboardEnabled { get; set; }
-
-    public string? Description { get; set; }
+@{
+    var dto = (OrderBookingGetDto?)ViewData["OrderModel"];
+}
+@{
+    Layout = null;
 }
 
+<form class="mb-4">
+    <!-- First Name -->
+    <div class="mb-4">
+        <input type="text" class="form-control" id="CustomerFirstName" value="@dto?.CustomerFirstName" placeholder="First Name">
 
-public partial class Atodorder
-{
-    public string? Id { get; set; }
+    </div>
 
-    public string? Cfn { get; set; }
+    <!-- Last Name -->
+    <div class="mb-4">
+        <input type="text" class="form-control" id="CustomerLastName" value="@dto?.CustomerLastName" placeholder="Last Name">
+    </div>
 
-    public string? Cln { get; set; }
+    <!-- Add Company Name Button -->
+    <div class="mb-4" id="addCompanyNameDiv" @(string.IsNullOrWhiteSpace(dto?.CustomerCompanyName) ? "" : "style=display:none;")>
+        <button type="button" class="btn__add" id="addCompanyName" onclick="showCompanyNameInput()">
+            <!-- button content -->
+        </button>
+    </div>
 
-    public string? Ocity { get; set; }
+    <!-- Company Name -->
+    <div class="mb-4" id="companyNameDiv" @(string.IsNullOrWhiteSpace(dto?.CustomerCompanyName) ? "style=display:none;" : "")>
+        <input type="text" class="form-control" id="CustomerCompanyName" value="@dto?.CustomerCompanyName" placeholder="Company Name">
+    </div>
 
-    public string? Ostate { get; set; }
 
-    public string? Ozip { get; set; }
+    <!-- Email -->
+    <div class="mb-4">
+        <input type="email" class="form-control" id="CustomerEmail" value="@dto?.CustomerEmail" placeholder="Email">
 
-    public string? Dcity { get; set; }
+    </div>
 
-    public string? Dstate { get; set; }
+   <!-- Add Another Email Button -->
+    <div class="mb-4" id="addAnotherEmailDiv" @(string.IsNullOrWhiteSpace(dto?.CustomerEmail2) ? "" : "style=display:none;")>
+        <button type="button" class="btn__add" id="addAnotherEmail" onclick="showAdditionalEmailInput()">
+           <span class="btn__base--left">
+                <i class="fa-sharp fa-solid fa-circle-plus"></i>
+            </span>
+            <span class="btn__base--right">
+                Add Company Name
+            </span>
+        </button>
+    </div>
 
-    public string? Dzip { get; set; }
+    <!-- Additional Email -->
+    <div class="mb-4" id="additionalEmailDiv" @(string.IsNullOrWhiteSpace(dto?.CustomerEmail2) ? "style=display:none;" : "")>
+        <input type="email" class="form-control" id="CustomerEmail2" value="@dto?.CustomerEmail2" placeholder="Additional Email">
+    </div>
 
-    public DateTime? Shipdate { get; set; }
 
-    public DateTime? Ordercreated { get; set; }
+    <!-- Phone -->
+    <div class="mb-4">
+        <input type="text" class="form-control" id="CustomerPhone" value="@dto?.CustomerPhone" placeholder="Phone">
 
-    public string? Cemail { get; set; }
+    </div>
 
-    public string? Cphone1 { get; set; }
+   <!-- Add Another Phone Button -->
+    <div class="mb-4" id="addAnotherPhoneDiv" @(string.IsNullOrWhiteSpace(dto?.CustomerPhone2) ? "" : "style=display:none;")>
+        <button type="button" class="btn__add" id="addAnotherPhone" onclick="showAdditionalPhoneInput()">
+            <span class="btn__base--left">
+                <i class="fa-sharp fa-solid fa-circle-plus"></i>
+            </span>
+            <span class="btn__base--right">
+                Add Another Phone
+            </span>
+        </button>
+    </div>
 
-    public string? Cmobile { get; set; }
+    <!-- Additional Phone -->
+    <div class="mb-4" id="additionalPhoneDiv" @(string.IsNullOrWhiteSpace(dto?.CustomerPhone2) ? "style=display:none;" : "")>
+        <input type="text" class="form-control" id="CustomerPhone2" value="@dto?.CustomerPhone2" placeholder="Additional Phone">
+    </div>
 
-    public string? Cphone2 { get; set; }
 
-    public string? Caddress1 { get; set; }
+    <!-- First Available Pickup Date -->
+    <div class="mb-4">
+        <input type="date" class="form-control" id="FirstAvailablePickupDate" value="@dto?.FirstAvailablePickupDate?.ToString("yyyy-MM-dd")">
 
-    public string? Caddress2 { get; set; }
+    </div>
 
-    public string? CCity { get; set; }
+    <!-- Label below date -->
+    <div class="mb-4">
+        <div class="header-block__desc">*This is the earliest date for pickup</div>
 
-    public string? CState { get; set; }
+    </div>
 
-    public string? CZip { get; set; }
+    <!-- Note -->
+    <div class="mb-4">
+        <label for="CommentFromShipper" class="form-label">Note</label>
+        <textarea class="form-control textarea-terms" id="CommentFromShipper" rows="2">@dto?.CommentFromShipper</textarea>
+    </div>
+</form>
 
-    public string? Source { get; set; }
+<script>
+    function showCompanyNameInput() {
+        document.getElementById("addCompanyNameDiv").style.display = "none";
+        document.getElementById("companyNameDiv").style.display = "block";
+    }
 
-    public string? Transporttype { get; set; }
+    function showAdditionalEmailInput() {
+        document.getElementById("addAnotherEmailDiv").style.display = "none";
+        document.getElementById("additionalEmailDiv").style.display = "block";
+    }
 
-    public DateTime? OCreated { get; set; }
+    function showAdditionalPhoneInput() {
+        document.getElementById("addAnotherPhoneDiv").style.display = "none";
+        document.getElementById("additionalPhoneDiv").style.display = "block";
+    }
+</script>
 
-    public double? Tariff { get; set; }
+@using SPORTv2.Contracts.OrderBookingContract
 
-    public int? Brokerfee { get; set; }
-
-    public string? AssignedTo { get; set; }
-
-    public string? OName { get; set; }
-
-    public string? Ocompany { get; set; }
-
-    public string? Oaddress1 { get; set; }
-
-    public string? Oaddress2 { get; set; }
-
-    public string? Ophone1 { get; set; }
-
-    public string? Omobile { get; set; }
-
-    public string? Ophone2 { get; set; }
-
-    public string? DName { get; set; }
-
-    public string? Dcompany { get; set; }
-
-    public string? Daddress1 { get; set; }
-
-    public string? Daddress2 { get; set; }
-
-    public string? Dphone1 { get; set; }
-
-    public string? Dphone2 { get; set; }
-
-    public string? Dmobile { get; set; }
-
-    public string? Carriername { get; set; }
-
-    public string? Driver { get; set; }
-
-    public string? Driverphone { get; set; }
-
-    public DateTime? Pickupdate { get; set; }
-
-    public DateTime? Deliverydate { get; set; }
-
-    public string? Status { get; set; }
-
-    public int? Carrierpay { get; set; }
-
-    public string? Vin { get; set; }
-
-    public double? Year { get; set; }
-
-    public string? Make { get; set; }
-
-    public string? Model { get; set; }
-
-    public double? InopOpposite { get; set; }
-
-    public int TblId { get; set; }
+@{
+    var dto = (OrderBookingGetDto?)ViewData["OrderModel"];
 }
+@{
+    Layout = null;
+}
+
+<form class="mb-4">
+    <!-- First Name -->
+    <div class="mb-4">
+        <input type="text" class="form-control" id="CustomerFirstName" value="@dto?.CustomerFirstName" placeholder="First Name">
+
+    </div>
+
+    <!-- Last Name -->
+    <div class="mb-4">
+        <input type="text" class="form-control" id="CustomerLastName" value="@dto?.CustomerLastName" placeholder="Last Name">
+    </div>
+
+    <!-- Add Company Name Button -->
+    <div class="mb-4" id="addCompanyNameDiv" @(string.IsNullOrWhiteSpace(dto?.CustomerCompanyName) ? "" : "style=display:none;")>
+        <button type="button" class="btn__add" id="addCompanyName" onclick="showCompanyNameInput()">
+            <!-- button content -->
+        </button>
+    </div>
+
+    <!-- Company Name -->
+    <div class="mb-4" id="companyNameDiv" @(string.IsNullOrWhiteSpace(dto?.CustomerCompanyName) ? "style=display:none;" : "")>
+        <input type="text" class="form-control" id="CustomerCompanyName" value="@dto?.CustomerCompanyName" placeholder="Company Name">
+    </div>
+
+
+    <!-- Email -->
+    <div class="mb-4">
+        <input type="email" class="form-control" id="CustomerEmail" value="@dto?.CustomerEmail" placeholder="Email">
+
+    </div>
+
+   <!-- Add Another Email Button -->
+    <div class="mb-4" id="addAnotherEmailDiv" @(string.IsNullOrWhiteSpace(dto?.CustomerEmail2) ? "" : "style=display:none;")>
+        <button type="button" class="btn__add" id="addAnotherEmail" onclick="showAdditionalEmailInput()">
+           <span class="btn__base--left">
+                <i class="fa-sharp fa-solid fa-circle-plus"></i>
+            </span>
+            <span class="btn__base--right">
+                Add Company Name
+            </span>
+        </button>
+    </div>
+
+    <!-- Additional Email -->
+    <div class="mb-4" id="additionalEmailDiv" @(string.IsNullOrWhiteSpace(dto?.CustomerEmail2) ? "style=display:none;" : "")>
+        <input type="email" class="form-control" id="CustomerEmail2" value="@dto?.CustomerEmail2" placeholder="Additional Email">
+    </div>
+
+
+    <!-- Phone -->
+    <div class="mb-4">
+        <input type="text" class="form-control" id="CustomerPhone" value="@dto?.CustomerPhone" placeholder="Phone">
+
+    </div>
+
+   <!-- Add Another Phone Button -->
+    <div class="mb-4" id="addAnotherPhoneDiv" @(string.IsNullOrWhiteSpace(dto?.CustomerPhone2) ? "" : "style=display:none;")>
+        <button type="button" class="btn__add" id="addAnotherPhone" onclick="showAdditionalPhoneInput()">
+            <span class="btn__base--left">
+                <i class="fa-sharp fa-solid fa-circle-plus"></i>
+            </span>
+            <span class="btn__base--right">
+                Add Another Phone
+            </span>
+        </button>
+    </div>
+
+    <!-- Additional Phone -->
+    <div class="mb-4" id="additionalPhoneDiv" @(string.IsNullOrWhiteSpace(dto?.CustomerPhone2) ? "style=display:none;" : "")>
+        <input type="text" class="form-control" id="CustomerPhone2" value="@dto?.CustomerPhone2" placeholder="Additional Phone">
+    </div>
+
+
+    <!-- First Available Pickup Date -->
+    <div class="mb-4">
+        <input type="date" class="form-control" id="FirstAvailablePickupDate" value="@dto?.FirstAvailablePickupDate?.ToString("yyyy-MM-dd")">
+
+    </div>
+
+    <!-- Label below date -->
+    <div class="mb-4">
+        <div class="header-block__desc">*This is the earliest date for pickup</div>
+
+    </div>
+
+    <!-- Note -->
+    <div class="mb-4">
+        <label for="CommentFromShipper" class="form-label">Note</label>
+        <textarea class="form-control textarea-terms" id="CommentFromShipper" rows="2">@dto?.CommentFromShipper</textarea>
+    </div>
+</form>
+
+<script>
+    function showCompanyNameInput() {
+        document.getElementById("addCompanyNameDiv").style.display = "none";
+        document.getElementById("companyNameDiv").style.display = "block";
+    }
+
+    function showAdditionalEmailInput() {
+        document.getElementById("addAnotherEmailDiv").style.display = "none";
+        document.getElementById("additionalEmailDiv").style.display = "block";
+    }
+
+    function showAdditionalPhoneInput() {
+        document.getElementById("addAnotherPhoneDiv").style.display = "none";
+        document.getElementById("additionalPhoneDiv").style.display = "block";
+    }
+</script>
+
+@using SPORTv2.Contracts.OrderBookingContract
+
+@{
+    var dto = (OrderBookingGetDto?)ViewData["OrderModel"];
+}
+@{
+    Layout = null;
+}
+
+<form class="mb-4">
+    <!-- First Name -->
+    <div class="mb-4">
+        <input type="text" class="form-control" id="CustomerFirstName" value="@dto?.CustomerFirstName" placeholder="First Name">
+
+    </div>
+
+    <!-- Last Name -->
+    <div class="mb-4">
+        <input type="text" class="form-control" id="CustomerLastName" value="@dto?.CustomerLastName" placeholder="Last Name">
+    </div>
+
+    <!-- Add Company Name Button -->
+    <div class="mb-4" id="addCompanyNameDiv" @(string.IsNullOrWhiteSpace(dto?.CustomerCompanyName) ? "" : "style=display:none;")>
+        <button type="button" class="btn__add" id="addCompanyName" onclick="showCompanyNameInput()">
+            <!-- button content -->
+        </button>
+    </div>
+
+    <!-- Company Name -->
+    <div class="mb-4" id="companyNameDiv" @(string.IsNullOrWhiteSpace(dto?.CustomerCompanyName) ? "style=display:none;" : "")>
+        <input type="text" class="form-control" id="CustomerCompanyName" value="@dto?.CustomerCompanyName" placeholder="Company Name">
+    </div>
+
+
+    <!-- Email -->
+    <div class="mb-4">
+        <input type="email" class="form-control" id="CustomerEmail" value="@dto?.CustomerEmail" placeholder="Email">
+
+    </div>
+
+   <!-- Add Another Email Button -->
+    <div class="mb-4" id="addAnotherEmailDiv" @(string.IsNullOrWhiteSpace(dto?.CustomerEmail2) ? "" : "style=display:none;")>
+        <button type="button" class="btn__add" id="addAnotherEmail" onclick="showAdditionalEmailInput()">
+           <span class="btn__base--left">
+                <i class="fa-sharp fa-solid fa-circle-plus"></i>
+            </span>
+            <span class="btn__base--right">
+                Add Company Name
+            </span>
+        </button>
+    </div>
+
+    <!-- Additional Email -->
+    <div class="mb-4" id="additionalEmailDiv" @(string.IsNullOrWhiteSpace(dto?.CustomerEmail2) ? "style=display:none;" : "")>
+        <input type="email" class="form-control" id="CustomerEmail2" value="@dto?.CustomerEmail2" placeholder="Additional Email">
+    </div>
+
+
+    <!-- Phone -->
+    <div class="mb-4">
+        <input type="text" class="form-control" id="CustomerPhone" value="@dto?.CustomerPhone" placeholder="Phone">
+
+    </div>
+
+   <!-- Add Another Phone Button -->
+    <div class="mb-4" id="addAnotherPhoneDiv" @(string.IsNullOrWhiteSpace(dto?.CustomerPhone2) ? "" : "style=display:none;")>
+        <button type="button" class="btn__add" id="addAnotherPhone" onclick="showAdditionalPhoneInput()">
+            <span class="btn__base--left">
+                <i class="fa-sharp fa-solid fa-circle-plus"></i>
+            </span>
+            <span class="btn__base--right">
+                Add Another Phone
+            </span>
+        </button>
+    </div>
+
+    <!-- Additional Phone -->
+    <div class="mb-4" id="additionalPhoneDiv" @(string.IsNullOrWhiteSpace(dto?.CustomerPhone2) ? "style=display:none;" : "")>
+        <input type="text" class="form-control" id="CustomerPhone2" value="@dto?.CustomerPhone2" placeholder="Additional Phone">
+    </div>
+
+
+    <!-- First Available Pickup Date -->
+    <div class="mb-4">
+        <input type="date" class="form-control" id="FirstAvailablePickupDate" value="@dto?.FirstAvailablePickupDate?.ToString("yyyy-MM-dd")">
+
+    </div>
+
+    <!-- Label below date -->
+    <div class="mb-4">
+        <div class="header-block__desc">*This is the earliest date for pickup</div>
+
+    </div>
+
+    <!-- Note -->
+    <div class="mb-4">
+        <label for="CommentFromShipper" class="form-label">Note</label>
+        <textarea class="form-control textarea-terms" id="CommentFromShipper" rows="2">@dto?.CommentFromShipper</textarea>
+    </div>
+</form>
+
+<script>
+    function showCompanyNameInput() {
+        document.getElementById("addCompanyNameDiv").style.display = "none";
+        document.getElementById("companyNameDiv").style.display = "block";
+    }
+
+    function showAdditionalEmailInput() {
+        document.getElementById("addAnotherEmailDiv").style.display = "none";
+        document.getElementById("additionalEmailDiv").style.display = "block";
+    }
+
+    function showAdditionalPhoneInput() {
+        document.getElementById("addAnotherPhoneDiv").style.display = "none";
+        document.getElementById("additionalPhoneDiv").style.display = "block";
+    }
+</script>
