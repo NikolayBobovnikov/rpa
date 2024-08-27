@@ -36,7 +36,7 @@ with open(file_path, 'r') as file:
             print(line.strip())  # strip() removes the newline character
             pyautogui.typewrite(line, interval=interval)
             pyautogui.press('enter')
-            pyautogui.sleep(random.randint(5, 20))
+            pyautogui.sleep(random.randint(10, 20))
             # if counter == 10:
             #     caret_x, caret_y = get_caret_position()
             #     pyautogui.moveTo(caret_x, caret_y)
