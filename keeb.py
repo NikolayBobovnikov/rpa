@@ -8,7 +8,7 @@ import ctypes
 vs_exe_path = r"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\devenv.exe"
 notepad_path = r'C:\Program Files\Notepad++\notepad++.exe'
 project_path = r"C:\home\projects\SPORT v2\SPORTv2\SPORTv2.sln"
-command = f'"{vs_exe_path}" "{project_path}"'
+command = f'"{notepad_path}"'  # "{project_path}"
 subprocess.Popen(command, shell=True)
 
 # Wait for Notepad++ to open
@@ -32,20 +32,20 @@ with open(file_path, 'r') as file:
         # Read each line in the file
         for line in file:
             counter = counter + 1
-            interval = random.randint(10, 200) / 1000
+            interval = random.randint(100, 300) / 1000
             print(line.strip())  # strip() removes the newline character
             pyautogui.typewrite(line, interval=interval)
             pyautogui.press('enter')
-            pyautogui.sleep(random.randint(100, 2000) / 1000)
-            if counter == 10:
-                caret_x, caret_y = get_caret_position()
-                pyautogui.moveTo(caret_x, caret_y)
-                pyautogui.sleep(random.randint(5, 100))
-                pyautogui.scroll(3)  # Scroll three units up
-                pyautogui.sleep(random.randint(5, 10))
-                pyautogui.scroll(-3)  # Scroll three units down
-                pyautogui.sleep(random.randint(5, 10))
-                counter = 0
+            pyautogui.sleep(random.randint(5, 20))
+            # if counter == 10:
+            #     caret_x, caret_y = get_caret_position()
+            #     pyautogui.moveTo(caret_x, caret_y)
+            #     pyautogui.sleeer" class="form-orm-contp(random.randint(5, 100))
+            #     pyautogui.scroll(3)  # Scroll three units up
+            #     pyautogui.sleep(random.randint(5, 10))
+            #     pyautogui.scroll(-3)  # Scroll three units down
+            #     pyautogui.sleep(random.randint(5, 10))
+            #     counter = 0
 
 # Wait for a moment
 pyautogui.sleep(1)
